@@ -29,7 +29,7 @@ final class IdentityApplicative extends Applicative
      */
     public function apply(Applicative $applicative): Applicative
     {
-        return self::pure($this->get()($applicative->get()));
+        return static::pure($this->get()($applicative->get()));
     }
 
     /**

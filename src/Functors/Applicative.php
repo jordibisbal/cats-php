@@ -26,9 +26,9 @@ abstract class Applicative implements Functor
 
     /**
      * @phpstan-param Closure(A):A $fn
-     * @return Applicative<A>
+     * @return static
      */
-    public function map(Closure $fn): Applicative
+    public function map(Closure $fn): static
     {
         return static::pure($fn)->apply($this);
     }

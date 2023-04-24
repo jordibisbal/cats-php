@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace j45l\Cats\Maybe;
 
+use Closure;
 use j45l\Cats\Functors\Functor;
 use j45l\Cats\Either\Either;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @template T
@@ -17,6 +19,7 @@ abstract class Maybe implements Functor
      * @param T $value $value
      * @return Some<T>
      */
+    #[Pure]
     public static function of(mixed $value): Some
     {
         return Some::pure($value);
@@ -74,5 +77,14 @@ abstract class Maybe implements Functor
     public function try(callable $fn): Either
     {
         return Either::try(fn () => $fn($this->getOrElse(null)));
+    }
+
+    /**
+     * @phpstan-return Maybe<T>
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function map(Closure $fn): Maybe
+    {
+        return $this;
     }
 }

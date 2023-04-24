@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace j45l\Cats\Either;
 
+use Closure;
 use Exception;
 use j45l\Cats\Functors\Functor;
 use j45l\Cats\Either\Reason\BecauseException;
@@ -59,4 +60,13 @@ abstract class Either implements Functor
      * @phpstan-return Maybe<Right>
      */
     abstract public function toMaybe(): Maybe;
+
+    /**
+     * @phpstan-return $this
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function map(Closure $fn): Either
+    {
+        return $this;
+    }
 }
