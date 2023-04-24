@@ -1,0 +1,4 @@
+#!/bin/bash
+export XDEBUG_MODE=off
+export BASE_PATH="$( dirname -- "${BASH_SOURCE[0]}" )"
+$BASE_PATH/../vendor/bin/phpcs  -s "$@" --cache=$BASE_PATH/../build/phpcs-cache
