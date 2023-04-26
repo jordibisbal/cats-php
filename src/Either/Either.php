@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace j45l\Cats\Either;
 
 use Closure;
+use Error;
 use Exception;
+use j45l\Cats\Either\Reason\BecauseError;
 use j45l\Cats\Functors\Functor;
 use j45l\Cats\Either\Reason\BecauseException;
 use j45l\Cats\Maybe\Maybe;
@@ -27,6 +29,8 @@ abstract class Either implements Functor
             return Success::pure($fn());
         } catch (Exception $exception) {
             return Failure::because(BecauseException::of($exception));
+        } catch (Error $error) {
+            return Failure::because(BecauseError::of($error));
         }
     }
 

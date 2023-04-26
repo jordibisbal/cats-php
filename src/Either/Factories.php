@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace j45l\Cats\Either;
 
+use Error;
 use Exception;
 use j45l\Cats\Either\Reason\Because;
+use j45l\Cats\Either\Reason\BecauseError;
 use j45l\Cats\Either\Reason\BecauseException;
 use j45l\Cats\Either\Reason\BecauseNone;
 use j45l\Cats\Either\Reason\Reason;
@@ -46,6 +48,11 @@ function BecauseNone(): BecauseNone
 function BecauseException(Exception $exception): BecauseException
 {
     return BecauseException::of($exception);
+}
+
+function BecauseError(Error $error): BecauseError
+{
+    return BecauseError::of($error);
 }
 
 function Because(string $reason): Because

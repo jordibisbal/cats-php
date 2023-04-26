@@ -9,12 +9,14 @@ use j45l\Cats\Either\Either;
 use j45l\Cats\Either\Failure;
 use j45l\Cats\Either\Success;
 
+use function j45l\Cats\Either\Success;
 use function j45l\Cats\Either\doTry;
 use function j45l\Cats\Either\isFailure;
 use function j45l\Cats\Either\isSuccess;
 use function j45l\functional\map;
 use function j45l\functional\none;
 use function j45l\functional\select;
+use function j45l\functional\with;
 
 final readonly class Validated
 {
@@ -65,5 +67,20 @@ final readonly class Validated
     public function get(): array
     {
         return map($this->succeed(), fn (Success $success) => $success->get());
+    }
+
+    /**
+     * @return Either<mixed>
+     * @noinspection PhpUndefinedMethodInspection
+     */
+    public function toEither(string $valueObjectClassName = null): Either
+    {
+        return match (true) {
+            !$this->allValid() => Failure::because(NotValidated::create($this->failed())),
+            $valueObjectClassName === null => Success((object) $this->get()),
+            default =>
+                /** @phpstan-ignore-next-line */
+                doTry(fn () => $valueObjectClassName::create(...$this->get()))
+        };
     }
 }
