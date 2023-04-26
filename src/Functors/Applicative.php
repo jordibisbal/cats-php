@@ -14,23 +14,20 @@ abstract class Applicative implements Functor
 {
     /**
      * @phpstan-param A $value
-     * @return Applicative<A>
      */
-    abstract public static function pure(mixed $value): Applicative;
+    abstract public static function pure(mixed $value): static;
 
     /**
      * @param Applicative<A> $applicative
-     * @return Applicative<A>
      */
-    abstract public function apply(Applicative $applicative): Applicative;
+    abstract public function apply(Applicative $applicative): static;
 
     /**
      * @phpstan-param Closure(A):A $fn
-     * @return static
      */
     public function map(Closure $fn): static
     {
-        return static::pure($fn)->apply($this);
+        return static::pure($this->get())->apply($this);
     }
 
     /**

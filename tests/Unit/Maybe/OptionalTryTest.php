@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 use function j45l\Cats\Either\BecauseException;
-use function j45l\Cats\Either\BecauseNull;
+use function j45l\Cats\Either\BecauseNone;
 use function j45l\Cats\Either\Failure;
 use function j45l\Cats\Either\Success;
 use function j45l\Cats\Maybe\None;
@@ -50,6 +50,6 @@ final class OptionalTryTest extends TestCase
 
     public function testAndThenTryFromNone(): void
     {
-        assertEquals(Failure(BecauseNull()), None()->andThenTry(fn () => 42));
+        assertEquals(Failure(BecauseNone()), None()->andThenTry(fn () => 42));
     }
 }

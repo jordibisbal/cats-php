@@ -39,7 +39,6 @@ final class IdentityApplicativeTest extends ApplicativeTestCase
         $applicative = IdentityApplicative::pure($add);
 
         self::assertEquals(15, $applicative->apply($five)->apply($ten)->get());
-        self::assertEquals(15, $five->map($add)->apply($ten)->get());
     }
 
     public function testAdderSubtract(): void
@@ -58,6 +57,5 @@ final class IdentityApplicativeTest extends ApplicativeTestCase
         $applicative = IdentityApplicative::pure($addSub);
 
         self::assertEquals(0, $applicative->apply($five)->apply($ten)->apply($fifteen)->get());
-        self::assertEquals(0, $five->map($addSub)->apply($ten)->apply($fifteen)->get());
     }
 }

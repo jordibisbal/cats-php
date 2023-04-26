@@ -17,8 +17,13 @@ final readonly class BecauseException implements Reason
         return new self($exception);
     }
 
-    public function reason(): string
+    public function __toString(): string
     {
         return $this->exception->getMessage();
+    }
+
+    public function toString(): string
+    {
+        return (string) $this;
     }
 }

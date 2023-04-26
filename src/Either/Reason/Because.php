@@ -30,8 +30,13 @@ final class Because implements Reason
         return $this->subject;
     }
 
-    public function reason(): string
+    public function __toString(): string
     {
         return $this->reason;
+    }
+
+    public function toString(): string
+    {
+        return (string) $this;
     }
 }

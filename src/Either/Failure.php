@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace j45l\Cats\Either;
 
-use Closure;
 use j45l\Cats\Either\Reason\Reason;
 use j45l\Cats\Maybe\None;
-
 use RuntimeException;
+
 use function j45l\functional\with;
 
 /**
@@ -52,30 +51,16 @@ final class Failure extends Either
     }
 
     /**
-     * @phpstan-return $this
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     */
-    public function map(Closure $fn): self
-    {
-        return $this;
-    }
-
-    /**
      * @template Result
      * @param callable(Failure<Right>):Result $fn
      * @return Either<Result>
      */
     public function orElse(callable $fn): Either
     {
-        return with(self::try(fn() => $fn($this)))(static fn(Either $either) => match (true) {
+        return with(self::try(fn () => $fn($this)))(static fn (Either $either) => match (true) {
             $either instanceof Success => $either->get(),
             default => $either
         });
-    }
-
-    public function reason(): Reason
-    {
-        return $this->reason;
     }
 
     /** @return None<Right> */

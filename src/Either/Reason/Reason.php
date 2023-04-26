@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace j45l\Cats\Either\Reason;
 
-interface Reason
+use Stringable;
+
+interface Reason extends Stringable
 {
-    public function reason(): string;
 }

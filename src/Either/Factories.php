@@ -7,7 +7,7 @@ namespace j45l\Cats\Either;
 use Exception;
 use j45l\Cats\Either\Reason\Because;
 use j45l\Cats\Either\Reason\BecauseException;
-use j45l\Cats\Either\Reason\BecauseNull;
+use j45l\Cats\Either\Reason\BecauseNone;
 use j45l\Cats\Either\Reason\Reason;
 
 /**
@@ -38,9 +38,9 @@ function Success(mixed $value = null): Success
     return Success::pure($value);
 }
 
-function BecauseNull(): BecauseNull
+function BecauseNone(): BecauseNone
 {
-    return BecauseNull::create();
+    return BecauseNone::create();
 }
 
 function BecauseException(Exception $exception): BecauseException

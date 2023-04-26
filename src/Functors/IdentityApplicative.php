@@ -16,18 +16,16 @@ final class IdentityApplicative extends Applicative
 
     /**
      * @param A $value
-     * @return self<A>
      */
-    public static function pure(mixed $value): self
+    public static function pure(mixed $value): static
     {
-        return new self($value);
+        return new static($value);
     }
 
     /**
      * @param Applicative<A> $applicative
-     * @return Applicative<A>
      */
-    public function apply(Applicative $applicative): Applicative
+    public function apply(Applicative $applicative): static
     {
         return static::pure($this->get()($applicative->get()));
     }

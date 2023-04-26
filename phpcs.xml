@@ -13,6 +13,10 @@
 
     <rule ref="PSR12"/>
 
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols"/>
+    </rule>
+
     <rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
         <properties>
             <property name="searchAnnotations " value="true"/>

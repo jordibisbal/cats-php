@@ -4,15 +4,20 @@ declare(strict_types=1);
 
 namespace j45l\Cats\Test\Unit\Either;
 
+use j45l\Cats\Either\Success;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+
 use function j45l\Cats\Either\Because;
 use function j45l\Cats\Either\BecauseException;
 use function j45l\Cats\Either\Failure;
 use function j45l\Cats\Either\Success;
 use function PHPUnit\Framework\assertEquals;
 
-/** @covers \j45l\Cats\Either\Success */
+#[CoversClass(Success::class)]
+#[CoversFunction(Success::class)]
 final class SuccessTest extends TestCase
 {
     public function testOrElseFromSuccess(): void
@@ -58,5 +63,17 @@ final class SuccessTest extends TestCase
             Success(42),
             Success(1)->andThen(fn ($x) => Success($x + 41))
         );
+    }
+
+    public function testCanBeMapped(): void
+    {
+        assertEquals(Success(42), Success(41)->map(fn ($x) => $x + 1));
+    }
+
+    public function testValueCanBeRetrieved(): void
+    {
+        assertEquals(42, Success(42)->get());
+        assertEquals(42, Success(42)->getOrElse());
+        assertEquals(42, Success(42)->getOrFail());
     }
 }

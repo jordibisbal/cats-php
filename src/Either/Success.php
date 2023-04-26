@@ -6,6 +6,7 @@ namespace j45l\Cats\Either;
 
 use Closure;
 use j45l\Cats\Maybe\Maybe;
+
 use function j45l\functional\with;
 
 /**

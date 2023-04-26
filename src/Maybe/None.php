@@ -7,7 +7,7 @@ namespace j45l\Cats\Maybe;
 use Closure;
 use j45l\Cats\Either\Either;
 use j45l\Cats\Either\Failure;
-use j45l\Cats\Either\Reason\BecauseNull;
+use j45l\Cats\Either\Reason\BecauseNone;
 use RuntimeException;
 
 /**
@@ -45,7 +45,7 @@ final class None extends Maybe
      */
     public function andThenTry(callable $fn): Failure
     {
-        return Failure::because(BecauseNull::create());
+        return Failure::because(BecauseNone::create());
     }
 
     /**

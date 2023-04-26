@@ -80,10 +80,10 @@ final class Some extends Maybe
     /**
      * @template T2
      * @param Closure(T):T2 $fn
-     * @phpstan-return static<T2>
+     * @phpstan-return Maybe<T2>
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function map(Closure $fn): static
+    public function map(Closure $fn): Maybe
     {
         return new self($fn($this->value));
     }
