@@ -12,10 +12,9 @@ use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-use function j45l\Cats\Either\Because;
-use function j45l\Cats\Either\Failure;
 use function j45l\Cats\Validated\Validated;
 use function j45l\functional\first;
+use function PHPUnit\Framework\assertEquals;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
@@ -45,7 +44,26 @@ final class ValidatedTest extends TestCase
         self::assertCount(1, $validated->failed());
         self::assertEquals(
             'Failed',
-            (string) first($validated->failed(), default: Failure(Because('testFailed')))?->reason
+            (string) first($validated->failed())?->reason
+        );
+    }
+
+    public function testCanGetValidatesOnes(): void
+    {
+        $validated = Validated::create([fn () => 42, fn () => throw new RuntimeException('Failed')]);
+        self::assertCount(1, $validated->succeed());
+        self::assertEquals(
+            42,
+            (string) first($validated->succeed())?->get()
+        );
+    }
+
+    public function testGettingValues(): void
+    {
+        assertEquals(
+            ['foo' => 1, 0 => 2],
+            Validated(['foo' => fn () => 1, fn () => 2])
+                ->get()
         );
     }
 }

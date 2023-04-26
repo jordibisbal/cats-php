@@ -7,9 +7,11 @@ namespace j45l\Cats\Validated;
 use Closure;
 use j45l\Cats\Either\Either;
 use j45l\Cats\Either\Failure;
+use j45l\Cats\Either\Success;
 
 use function j45l\Cats\Either\doTry;
 use function j45l\Cats\Either\isFailure;
+use function j45l\Cats\Either\isSuccess;
 use function j45l\functional\map;
 use function j45l\functional\none;
 use function j45l\functional\select;
@@ -50,5 +52,18 @@ final readonly class Validated
     {
         /** @phpstan-ignore-next-line */
         return select($this->values, fn (Either $validation) => isFailure($validation));
+    }
+
+    /** @return Success<mixed>[] */
+    public function succeed(): array
+    {
+        /** @phpstan-ignore-next-line */
+        return select($this->values, fn (Either $validation) => isSuccess($validation));
+    }
+
+    /** @return mixed[] */
+    public function get(): array
+    {
+        return map($this->succeed(), fn (Success $success) => $success->get());
     }
 }
