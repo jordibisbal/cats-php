@@ -1,26 +1,32 @@
 <?php
 
+/** @noinspection ClassConstantCanBeUsedInspection */
+
 declare(strict_types=1);
 
 namespace j45l\Cats\Test\Unit\Validated;
 
 use j45l\Cats\Validated\Validated;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 use function j45l\Cats\Either\Because;
 use function j45l\Cats\Either\Failure;
+use function j45l\Cats\Validated\Validated;
 use function j45l\functional\first;
 use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertTrue;
 
-#[CoversClass(Validated::class)] final class ValidatedTest extends TestCase
+#[CoversClass(Validated::class)]
+#[CoversFunction('\j45l\Cats\Validated\Validated')]
+final class ValidatedTest extends TestCase
 {
     public function testValidatesWhenAllValid(): void
     {
         assertTrue(
-            Validated::create([fn () => 1, fn () => 2])
+            Validated([fn () => 1, fn () => 2])
                 ->allValid()
         );
     }
