@@ -83,8 +83,5 @@ abstract class Maybe implements Functor
      * @phpstan-return Maybe<T>
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function map(Closure $fn): Maybe
-    {
-        return $this;
-    }
+    abstract public function map(Closure $fn): Maybe;
 }

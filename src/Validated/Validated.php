@@ -16,7 +16,6 @@ use function j45l\Cats\Either\isSuccess;
 use function j45l\functional\map;
 use function j45l\functional\none;
 use function j45l\functional\select;
-use function j45l\functional\with;
 
 final readonly class Validated
 {
@@ -76,7 +75,7 @@ final readonly class Validated
     public function toEither(string $valueObjectClassName = null): Either
     {
         return match (true) {
-            !$this->allValid() => Failure::because(NotValidated::create($this->failed())),
+            !$this->allValid() => Failure::because(Failed::create($this->failed())),
             $valueObjectClassName === null => Success((object) $this->get()),
             default =>
                 /** @phpstan-ignore-next-line */
