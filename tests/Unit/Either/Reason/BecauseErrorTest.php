@@ -8,7 +8,6 @@ use Error;
 use j45l\Cats\Either\Reason\BecauseError;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversFunction;
-use RuntimeException;
 use PHPUnit\Framework\TestCase;
 
 use function j45l\Cats\Either\BecauseError;

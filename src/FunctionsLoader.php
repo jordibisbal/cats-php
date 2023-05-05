@@ -7,3 +7,5 @@ require_once(__DIR__ . '/Maybe/Factories.php');
 require_once(__DIR__ . '/Either/Predicates.php');
 require_once(__DIR__ . '/Either/Factories.php');
 require_once(__DIR__ . '/Validated/Factories.php');
+
+require_once(__DIR__ . '/Either/Retry.php');

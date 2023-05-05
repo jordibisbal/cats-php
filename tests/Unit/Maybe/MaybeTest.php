@@ -11,8 +11,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\TestCase;
 
-use function j45l\Cats\Either\BecauseNone;
-use function j45l\Cats\Either\Failure;
 use function j45l\Cats\Either\Success;
 use function j45l\Cats\Maybe\Maybe;
 use function j45l\Cats\Maybe\None;
